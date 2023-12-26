@@ -50,7 +50,8 @@ export const useProductStore = defineStore('product', () => {
         try {
             isLoading.value = true;
             const data = await productServices.findOne(slug);
-            product.value = data;
+            console.log("DATA", data);
+            return data;
 
         } catch (error) {
             router.push('/products');
@@ -70,7 +71,7 @@ export const useProductStore = defineStore('product', () => {
         }
     }
 
-    async function editProduct(id: string, image: any, product: any) {
+    async function editProduct(id: number, image: any, product: any) {
         try {
             // If a new image is provided, upload it first
             let imageUrl = '';

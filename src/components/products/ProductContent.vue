@@ -1,30 +1,28 @@
 <script lang="ts" setup>
 import type { IProduct } from '../../interface/products/full-product';
 
-defineProps<{
-    product: IProduct;
-}>();
-
+const props = defineProps<{ product: IProduct }>();
+console.log("props product", props.product);
 
 const baseUrl = 'http://127.0.0.1:8000';
 </script>
 
 <template>
-  <form class="product__form">
-    <div class="text-center max-w-[560px] w-full">
-      <h3>Product Image</h3>
-
-      <img :src="baseUrl + product.image" :alt="product.name" />
+  <form v-if="props.product" class="product__form">
+    <div class="text-center items-center max-w-[560px] w-full">
+      <div class="wrapped">
+        <img :src="baseUrl + props.product.image" :alt="props.product.name" />
+      </div>
     </div>
 
     <div class="w-full">
       <h3>Product Details</h3>
 
       <div class="form-control">
-        <label for="name">Nombre del producto:</label>
+        <label for="name">Product Name:</label>
         <input
           disabled
-          :value="product.name"
+          :value="props.product.name"
           type="text"
           name="name"
           id="name"
@@ -35,7 +33,7 @@ const baseUrl = 'http://127.0.0.1:8000';
         <label for="description">Description: </label>
         <textarea
           disabled
-          :value="product.description"
+          :value="props.product.description"
           class="product__form--textarea"
           cols="3"
           rows="3"
@@ -49,7 +47,7 @@ const baseUrl = 'http://127.0.0.1:8000';
         <label for="stock">Stock: </label>
         <input
           disabled
-          :value="product.stock"
+          :value="props.product.stock"
           type="number"
           min="0"
           name="stock"
@@ -61,7 +59,7 @@ const baseUrl = 'http://127.0.0.1:8000';
         <label for="price">Price: </label>
         <input
           disabled
-          :value="product.price"
+          :value="props.product.price"
           type="number"
           min="0"
           name="price"
@@ -73,7 +71,7 @@ const baseUrl = 'http://127.0.0.1:8000';
         <label for="category">Categories: </label>
         <input
           disabled
-          :value="product.category.name"
+          :value="props.product.category.name"
           type="text"
           name="category"
           id="category"
@@ -85,14 +83,18 @@ const baseUrl = 'http://127.0.0.1:8000';
 
 <style scoped>
 .product__form {
-    @apply grid lg:flex w-full gap-12 items-center
+  @apply grid lg:flex w-full gap-12 items-center
 }
 
 .product__form--select {
-    @apply py-3 px-2 rounded-lg border border-slate-400 focus:outline-primary
+  @apply py-3 px-2 rounded-lg border border-slate-400 focus:outline-primary
 }
-
+.wrapped{
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
 .product__form--textarea {
-    @apply bg-white rounded-lg border border-slate-400 focus:outline-primary p-2
+  @apply bg-white rounded-lg border border-slate-400 focus:outline-primary p-2
 }
 </style>

@@ -1,10 +1,9 @@
 <template>
-    <section class="min-h-screen flex flex-col justify-center items-center">
-        <div class="spinner"></div>
-        <p>Cargando...</p>
-    </section>
+  <section class="min-h-screen flex flex-col justify-center items-center">
+    <div class="spinner"></div>
+    <p>Loading...</p>
+  </section>
 </template>
-    
 
 <style scoped>
 .spinner {

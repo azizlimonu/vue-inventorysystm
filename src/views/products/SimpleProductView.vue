@@ -6,14 +6,25 @@ import { useProductStore } from '../../stores/product';
 import { storeToRefs } from 'pinia';
 import LoadingScreen from '@/components/shared/LoadingScreen.vue';
 import ProductContent from '@/components/products/ProductContent.vue';
+import { onMounted } from 'vue';
 
 const { params } = useRoute();
 
 const productStore = useProductStore();
 const { product, isLoading } = storeToRefs(productStore);
 
-
-productStore.getProductBySlug( params.slug as string );
+onMounted(async () => {
+  try {
+   const result= await productStore.getProductBySlug(params.slug as string);
+  //  console.log("RESULT", result);
+    product.value = result;
+    // console.log("PRODUCT IS TRUE", result);
+  } catch (error) {
+    console.error(error);
+  } finally {
+    isLoading.value = false;
+  }
+});
 </script>
 
 <template>
@@ -21,7 +32,7 @@ productStore.getProductBySlug( params.slug as string );
 
   <template v-else>
     <HeaderPage
-      :title="product!.name ?? ''"
+      title="Product Details"
       description="Product Description"
       btn-title="Go Back"
       pathname="products"

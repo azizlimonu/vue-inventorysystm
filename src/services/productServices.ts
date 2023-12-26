@@ -14,9 +14,10 @@ async function find(): Promise<IProductsResponseData[]> {
 
 async function findOne(slug: string): Promise<IProduct> {
     try {
-        const { data } = await inventoryDb.get<IFullProduct>(`/products/${slug}`);
+        const { data } = await inventoryDb.get(`/products/${slug}`);
+        console.log("DATA FIND ONE", data.product);
         return data.product;
-    
+
     } catch (error) {
         throw error;
     }
@@ -24,19 +25,19 @@ async function findOne(slug: string): Promise<IProduct> {
 
 async function remove(id: string) {
     try {
-        const { data } = await inventoryDb.delete(`/products/${ id }`);
+        const { data } = await inventoryDb.delete(`/products/${id}`);
         return data.message;
     } catch (error) {
         throw error
     }
 }
 
-async function create( image: any, product: IProductCreate ) {
+async function create(image: any, product: IProductCreate) {
 
     try {
         const formData = new FormData();
         formData.append('image', image);
-    
+
         const { data: imageUrl } = await inventoryDb.post('/upload', formData);
 
         const { data } = await inventoryDb.post('/products', {
