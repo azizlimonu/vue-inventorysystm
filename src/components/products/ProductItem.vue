@@ -12,6 +12,7 @@ const productStore = useProductStore();
 </script>
 
 <template>
+  <h1>PRODUCT DETAILS</h1>
   <div
     class="product__card grid lg:grid-cols-9 gap-7 items-center font-semibold"
   >

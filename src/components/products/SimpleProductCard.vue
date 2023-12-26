@@ -1,9 +1,11 @@
 <script lang="ts" setup>
 import { useCartStore } from '../../stores/cart';
 import type { IProductsResponseData } from '@/interface';
-
-const baseUrl = import.meta.env.VITE_API_URL_IMAGE;
-
+import { useRoute } from 'vue-router';
+const route = useRoute()
+const {params}=route;
+console.log(params);
+const baseUrl = import.meta.env.VITE_API_URL;
 
 const cartStore = useCartStore();
 
@@ -13,6 +15,7 @@ defineProps<{
 </script>
 
 <template>
+  <p>PRODUCT DETAILS</p>
   <div
     class="product__card grid md:grid-cols-7 gap-2 items-center font-semibold text-sm"
   >

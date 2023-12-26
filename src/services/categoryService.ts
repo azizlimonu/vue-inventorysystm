@@ -2,20 +2,20 @@ import inventoryDb from "@/api/inventoryDb"
 import type { ICategoriesResponse } from "@/interface";
 
 
-async function find(): Promise<ICategoriesResponse[]>{
+async function find(): Promise<ICategoriesResponse[]> {
     try {
         const { data } = await inventoryDb.get('/categories');
         return data;
-        
+
     } catch (error) {
         throw error;
     }
-    
+
 }
 
-async function findOne(term:string): Promise<ICategoriesResponse> {
+async function findOne(term: string): Promise<ICategoriesResponse> {
     try {
-        const { data } = await inventoryDb.get<ICategoriesResponse>(`/categories/${ term }`);
+        const { data } = await inventoryDb.get<ICategoriesResponse>(`/categories/${term}`);
         return data;
 
     } catch (error) {
@@ -23,7 +23,7 @@ async function findOne(term:string): Promise<ICategoriesResponse> {
     }
 }
 
-async function create(name:string): Promise<string> {
+async function create(name: string): Promise<string> {
     try {
         const { data } = await inventoryDb.post('/categories', { name });
         return data.message;
@@ -31,12 +31,12 @@ async function create(name:string): Promise<string> {
     } catch (error) {
         throw error;
     }
-    
+
 }
 
 async function update(id: number, name: string) {
     try {
-        const { data } = await inventoryDb.patch(`/categories/${ id }`, { name });
+        const { data } = await inventoryDb.put(`/categories/${id}`, { name });
         return data.message;
     } catch (error) {
         console.log(error);
@@ -44,9 +44,9 @@ async function update(id: number, name: string) {
     }
 }
 
-async function remove(id:string): Promise<string> {
+async function remove(id: string): Promise<string> {
     try {
-        const { data } = await inventoryDb.delete(`/categories/${ id }`);
+        const { data } = await inventoryDb.delete(`/categories/${id}`);
         return data.message;
 
     } catch (error) {

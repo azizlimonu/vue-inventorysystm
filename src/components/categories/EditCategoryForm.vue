@@ -17,7 +17,7 @@ const { handleSubmit, isLoading } = useEditCategory();
     <div class="form-control">
       <label for="name">Product Name: </label>
       <input
-        value="props.category.name"
+        v-model="props.category.name"
         type="text"
         id="name"
         name="category-name"

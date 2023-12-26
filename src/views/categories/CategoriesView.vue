@@ -6,13 +6,12 @@ import { useCategoryStore } from '../../stores/category';
 
 const categoryStore = useCategoryStore();
 
-
-const title = ref('Categorias')
+const title = ref('Categories')
 </script>
 
 <template>
   <HeaderPage
-    btn-title="Categories"
+    btn-title="Category"
     pathname="new-category"
     :title="title"
     description="List Product Category"

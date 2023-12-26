@@ -7,7 +7,6 @@ import LoadingScreen from '@/components/shared/LoadingScreen.vue';
 import EditCategoryForm from '@/components/categories/EditCategoryForm.vue';
 import type { ICategoriesResponse } from '../../interface/categories/categories-response';
 
-
 const { params } = useRoute();
 const categoryStore = useCategoryStore();
 
@@ -19,10 +18,8 @@ const category = ref<ICategoriesResponse | undefined>({
     updated_at: '',
 });
 
-
 onMounted(async () => {
     category.value = await categoryStore.getCategoryByTerm(params.slug as string);
-    console.log(category.value);
 })
 </script>
 

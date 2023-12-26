@@ -6,8 +6,8 @@ const categoryStore = useCategoryStore();
 
 const name = ref('');
 
-
 const handleSubmit = () => {
+  console.log("POSTED",name.value);
     categoryStore.createNewCategory(name.value);
     name.value = '';
 }
@@ -20,7 +20,7 @@ const handleSubmit = () => {
   >
     <div class="form-control">
       <label for="name">Product Name: </label>
-      <input value="name" type="text" id="name" name="category-name" />
+      <input v-model="name" type="text" id="name" name="category-name" />
     </div>
 
     <button class="btn-primary">

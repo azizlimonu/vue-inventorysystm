@@ -7,7 +7,6 @@ import { storeToRefs } from 'pinia';
 
 const productStore = useProductStore();
 const { products } = storeToRefs(productStore);
-console.log(products)
 </script>
 
 <template>
@@ -18,7 +17,6 @@ console.log(products)
     description="Manage your product inventory"
   />
 
-  <!-- LISTADO DE PRODUCTOS -->
   <ul class="space-y-4">
     <li v-for="product in products" :key="product.id">
       <ProductItem :product="product" />

@@ -50,8 +50,8 @@ const router = createRouter({
         },
         {
           path: 'products/edit/:slug',
-          name: 'product',
-          component: () => import('@/views/products/SimpleProductView.vue')
+          name: 'product-edit',
+          component: () => import('@/views/products/EditProductView.vue')
         },
         {
           path: 'sales',
@@ -81,8 +81,7 @@ const router = createRouter({
 })
 
 
-router.beforeEach(async (to, form, next) => {
-
+router.beforeEach(async (to, from, next) => {
   const requiresAuth = to.matched.some(url => url.meta.requiresAuth);
 
   if (requiresAuth) {
@@ -92,14 +91,14 @@ router.beforeEach(async (to, form, next) => {
     const user = await authService.validate(token!);
 
     if (!token || !user) {
-      next({ path: '/auth/login' })
+      next({ path: '/auth/login' });
       return;
     }
 
     next();
+  } else {
+    next();
   }
-
-  next();
-})
+});
 
 export default router
