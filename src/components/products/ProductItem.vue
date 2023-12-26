@@ -45,7 +45,12 @@ const productStore = useProductStore();
           class="btn-primary text-center"
           >View</RouterLink
         >
-        <button class="btn-primary">Edit</button>
+        <RouterLink
+          :to="{ path: `/products/edit/${ product.slug }` }"
+          class="btn-primary text-center"
+        >
+          Edit
+        </RouterLink>
         <button
           @click="productStore.deleteProductById(`${ product.id }`)"
           class="btn-delete"

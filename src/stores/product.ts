@@ -7,6 +7,7 @@ import type { IProduct, IProductCreate, IProductsResponseData } from "@/interfac
 
 import { useToastStore } from "./toast";
 import { handleAxiosError } from "@/helpers/handle-axios-error";
+import inventoryDb from "@/api/inventoryDb";
 
 export const useProductStore = defineStore('product', () => {
 
@@ -69,6 +70,29 @@ export const useProductStore = defineStore('product', () => {
         }
     }
 
+    async function editProduct(id: string, image: any, product: any) {
+        try {
+            // If a new image is provided, upload it first
+            let imageUrl = '';
+            if (image) {
+                const formData = new FormData();
+                formData.append('image', image);
+                const { data } = await inventoryDb.post('/upload', formData);
+                imageUrl = data;
+            }
+
+            // Update the product details
+            const { data } = await inventoryDb.put(`/products/${id}`, {
+                ...product,
+                image: imageUrl,
+            });
+
+            return data.message;
+        } catch (error) {
+            toastStore.showToast('error', "Error update product");
+        }
+    }
+
 
     onMounted(() => {
         getAllProducts();
@@ -82,6 +106,7 @@ export const useProductStore = defineStore('product', () => {
         // METHODS
         createNewProduct,
         getProductBySlug,
-        deleteProductById
+        deleteProductById,
+        editProduct
     }
 })

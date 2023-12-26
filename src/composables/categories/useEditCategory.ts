@@ -11,10 +11,10 @@ export const useEditCategory = () => {
 
     const isLoading = ref(false);
 
-    const handleSubmit = async (  category: ICategoriesResponse ) => {
+    const handleSubmit = async (category: ICategoriesResponse) => {
 
         if (category.name.trim() === "") {
-            toastStore.showToast('error', "Ingrese un nombre valido");
+            toastStore.showToast('error', "Input Valid Category");
             return;
         }
 
